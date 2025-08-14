@@ -1,1 +1,169 @@
 # HTML Cheat Sheet
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Cheat Sheet — Beginner to Pro</title>
+</head>
+<body>
+
+<!-- 1️⃣ Basic HTML Structure -->
+<h1>Basic HTML Structure</h1>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<!-- 2️⃣ Headings & Paragraphs -->
+<h1>Headings & Paragraphs</h1>
+<h1>Main Heading</h1>
+<h2>Subheading</h2>
+<h3>Section</h3>
+<p>This is a paragraph.</p>
+
+<!-- 3️⃣ Text Formatting -->
+<h1>Text Formatting</h1>
+<b>Bold</b> / <strong>Strong emphasis</strong><br>
+<i>Italic</i> / <em>Emphasis</em><br>
+<u>Underline</u><br>
+<mark>Highlighted</mark><br>
+<small>Small text</small><br>
+<del>Deleted</del><br>
+<ins>Inserted</ins><br>
+<sup>Superscript</sup> / <sub>Subscript</sub><br>
+
+<!-- 4️⃣ Links -->
+<h1>Links</h1>
+<a href="https://example.com">Visit Example</a><br>
+<a href="mailto:someone@example.com">Email</a><br>
+<a href="tel:+123456789">Call</a><br>
+<a href="#section">Jump to Section</a><br>
+<a href="file.pdf" download>Download PDF</a><br>
+
+<!-- 5️⃣ Images -->
+<h1>Images</h1>
+<img src="image.jpg" alt="Description" width="300" height="200">
+
+<!-- 6️⃣ Lists -->
+<h1>Lists</h1>
+<!-- Ordered List -->
+<ol>
+  <li>First</li>
+  <li>Second</li>
+</ol>
+<!-- Unordered List -->
+<ul>
+  <li>Item A</li>
+  <li>Item B</li>
+</ul>
+<!-- Description List -->
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+</dl>
+
+<!-- 7️⃣ Tables -->
+<h1>Tables</h1>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>25</td>
+  </tr>
+</table>
+
+<!-- 8️⃣ Forms -->
+<h1>Forms</h1>
+<form action="/submit" method="POST">
+  <label>Name: <input type="text" name="name"></label><br>
+  <input type="email" name="email" required><br>
+  <input type="password" name="password"><br>
+  <input type="number" min="1" max="10"><br>
+  <textarea name="message"></textarea><br>
+  <select name="country">
+    <option>USA</option>
+    <option>UK</option>
+  </select><br>
+  <input type="checkbox" name="subscribe"> Subscribe<br>
+  <input type="radio" name="gender" value="male"> Male
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="submit" value="Submit">
+</form>
+
+<!-- 9️⃣ Semantic HTML -->
+<h1>Semantic HTML</h1>
+<header>Header content</header>
+<nav>Navigation links</nav>
+<main>Main content</main>
+<section>Section content</section>
+<article>Independent content</article>
+<aside>Sidebar</aside>
+<footer>Footer content</footer>
+
+<!-- 🔟 Media -->
+<h1>Media</h1>
+<video src="video.mp4" controls autoplay loop muted></video><br>
+<audio src="audio.mp3" controls></audio><br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xyz" allowfullscreen></iframe>
+
+<!-- 1️⃣1️⃣ Metadata & SEO -->
+<h1>Metadata & SEO</h1>
+<pre>
+&lt;meta name="description" content="Short page description"&gt;
+&lt;meta name="keywords" content="HTML, CSS, Cheat Sheet"&gt;
+&lt;meta name="author" content="Your Name"&gt;
+&lt;link rel="icon" href="favicon.ico" type="image/x-icon"&gt;
+</pre>
+
+<!-- 1️⃣2️⃣ Advanced Attributes -->
+<h1>Advanced Attributes</h1>
+<a href="https://example.com" target="_blank" rel="noopener noreferrer">New Tab</a><br>
+<img src="image.jpg" loading="lazy" alt="Lazy load image"><br>
+<input type="text" placeholder="Enter your name"><br>
+
+<!-- 1️⃣3️⃣ Accessibility -->
+<h1>Accessibility</h1>
+<img src="dog.jpg" alt="Golden retriever puppy"><br>
+<button aria-label="Close">X</button>
+
+<!-- 1️⃣4️⃣ Special Characters -->
+<h1>Special Characters</h1>
+<pre>
+&lt; = <
+&gt; = >
+&amp; = &
+&nbsp; = (non-breaking space)
+&copy; = ©
+&reg; = ®
+</pre>
+
+<!-- 1️⃣5️⃣ HTML5 APIs -->
+<h1>HTML5 APIs</h1>
+<!-- Geolocation -->
+<script>
+navigator.geolocation.getCurrentPosition(pos => {
+  console.log(pos.coords.latitude, pos.coords.longitude);
+});
+</script>
+
+<!-- Local Storage -->
+<script>
+localStorage.setItem("name", "John");
+alert(localStorage.getItem("name"));
+</script>
+
+</body>
+</html>

@@ -1,1 +1,280 @@
+/* ===============================
+   ⚛️ COMPLETE REACT CHEAT SHEET
+   Basic → Intermediate → Advanced
+   =============================== */
+
+/* 1. React Setup */
+import React from "react";
+import ReactDOM from "react-dom/client";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+/* 2. Components */
+function Hello(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+const HelloArrow = ({ name }) => <h1>Hello, {name}!</h1>;
+
+/* 3. JSX Basics */
+const element = (
+  <div className="box">
+    <h1>{2 + 2}</h1>
+    <p>{"JSX is JavaScript + XML"}</p>
+  </div>
+);
+
+/* 4. Props */
+function Button({ text, onClick }) {
+  return <button onClick={onClick}>{text}</button>;
+}
+<Button text="Click" onClick={() => alert("Clicked!")} />;
+
+/* 5. useState Hook */
+import { useState } from "react";
+function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
+}
+
+/* 6. useEffect Hook */
+import { useEffect } from "react";
+function Timer() {
+  const [time, setTime] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setTime(t => t + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return <p>Time: {time}</p>;
+}
+
+/* 7. useRef Hook */
+import { useRef } from "react";
+function InputFocus() {
+  const inputRef = useRef();
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={() => inputRef.current.focus()}>Focus</button>
+    </>
+  );
+}
+
+/* 8. useContext Hook */
+const ThemeContext = React.createContext("light");
+function ThemedButton() {
+  const theme = React.useContext(ThemeContext);
+  return <button className={theme}>Theme: {theme}</button>;
+}
+<ThemeContext.Provider value="dark"><ThemedButton /></ThemeContext.Provider>;
+
+/* 9. useReducer Hook */
+import { useReducer } from "react";
+function reducer(state, action) {
+  switch (action.type) {
+    case "inc": return { count: state.count + 1 };
+    case "dec": return { count: state.count - 1 };
+    default: return state;
+  }
+}
+function ReducerCounter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  return (
+    <>
+      <button onClick={() => dispatch({ type: "dec" })}>-</button>
+      {state.count}
+      <button onClick={() => dispatch({ type: "inc" })}>+</button>
+    </>
+  );
+}
+
+/* 10. useMemo & useCallback */
+import { useMemo, useCallback } from "react";
+function ExpensiveCalc({ num }) {
+  const result = useMemo(() => num * 2, [num]);
+  const log = useCallback(() => console.log("clicked"), []);
+  return <button onClick={log}>{result}</button>;
+}
+
+/* 11. useLayoutEffect */
+import { useLayoutEffect } from "react";
+useLayoutEffect(() => {
+  // Runs synchronously after DOM mutations
+});
+
+/* 12. useId (React 18+) */
+function FormField() {
+  const id = React.useId();
+  return (
+    <>
+      <label htmlFor={id}>Name</label>
+      <input id={id} />
+    </>
+  );
+}
+
+/* 13. Custom Hook */
+function useToggle(initial = false) {
+  const [state, setState] = useState(initial);
+  const toggle = () => setState(s => !s);
+  return [state, toggle];
+}
+const [on, toggle] = useToggle();
+
+/* 14. Conditional Rendering */
+{isLoggedIn ? <Dashboard /> : <Login />}
+
+/* 15. Lists & Keys */
+const users = ["Ali", "Sara", "John"];
+<ul>{users.map((u, i) => <li key={i}>{u}</li>)}</ul>;
+
+/* 16. Forms */
+function Form() {
+  const [val, setVal] = useState("");
+  return (
+    <form onSubmit={e => { e.preventDefault(); alert(val); }}>
+      <input value={val} onChange={e => setVal(e.target.value)} />
+    </form>
+  );
+}
+
+/* 17. Controlled vs Uncontrolled */
+<input value={name} onChange={e => setName(e.target.value)} />  // Controlled
+<input defaultValue="hello" />                                 // Uncontrolled
+
+/* 18. Fragments */
+<>
+  <h1>Hello</h1>
+  <p>World</p>
+</>
+
+/* 19. React Router */
+import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
+function User() { const { id } = useParams(); return <h1>User {id}</h1>; }
+function RouterApp() {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Link to="/about">About</Link>
+      <button onClick={() => navigate("/")}>Go Home</button>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/user/:id" element={<User />} />
+      </Routes>
+    </>
+  );
+}
+<BrowserRouter><RouterApp /></BrowserRouter>;
+
+/* 20. Context API Example */
+const AuthContext = React.createContext();
+function App() {
+  const [user, setUser] = useState(null);
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      <Navbar />
+    </AuthContext.Provider>
+  );
+}
+function Navbar() {
+  const { user } = React.useContext(AuthContext);
+  return <p>{user ? `Welcome ${user}` : "Guest"}</p>;
+}
+
+/* 21. Error Boundaries (class only) */
+class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error, info) { console.error(error, info); }
+  render() { return this.state.hasError ? <h1>Error!</h1> : this.props.children; }
+}
+
+/* 22. Suspense & Lazy Loading */
+const LazyComp = React.lazy(() => import("./LazyComp"));
+<Suspense fallback={<div>Loading...</div>}><LazyComp /></Suspense>;
+
+/* 23. Portals */
+import { createPortal } from "react-dom";
+function Modal() {
+  return createPortal(<div className="modal">Hi</div>, document.getElementById("modal-root"));
+}
+
+/* 24. PropTypes & Default Props */
+import PropTypes from "prop-types";
+function Greet({ name }) { return <h1>{name}</h1>; }
+Greet.propTypes = { name: PropTypes.string.isRequired };
+Greet.defaultProps = { name: "Guest" };
+
+/* 25. Memoization & Optimization */
+const Child = React.memo(({ value }) => <p>{value}</p>);
+
+/* 26. Performance Tools */
+// React.memo, useMemo, useCallback, useTransition, Suspense, code splitting
+
+/* 27. useTransition (React 18+) */
+import { useTransition } from "react";
+function Search({ items }) {
+  const [input, setInput] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const filtered = items.filter(i => i.includes(input));
+  return (
+    <>
+      <input onChange={e => startTransition(() => setInput(e.target.value))} />
+      {isPending ? "Loading..." : filtered.map(i => <p key={i}>{i}</p>)}
+    </>
+  );
+}
+
+/* 28. useDeferredValue (React 18+) */
+function List({ query }) {
+  const deferredQuery = React.useDeferredValue(query);
+  const items = bigList.filter(i => i.includes(deferredQuery));
+  return items.map(i => <p key={i}>{i}</p>);
+}
+
+/* 29. Concurrent Rendering (React 18) */
+// Features: useTransition, useDeferredValue, Suspense with data
+
+/* 30. Testing (Jest + RTL) */
+import { render, screen, fireEvent } from "@testing-library/react";
+test("button works", () => {
+  render(<button>Click</button>);
+  expect(screen.getByText("Click")).toBeInTheDocument();
+});
+
+/* 31. Next.js Basics */
+import Link from "next/link";
+export default function Home() {
+  return (
+    <>
+      <h1>Welcome</h1>
+      <Link href="/about">About</Link>
+    </>
+  );
+}
+
+/* 32. Redux (Basic Example) */
+import { createStore } from "redux";
+const reducer = (state = { count: 0 }, action) =>
+  action.type === "INC" ? { count: state.count + 1 } : state;
+const store = createStore(reducer);
+store.dispatch({ type: "INC" });
+
+/* 33. Zustand (State Management) */
+import create from "zustand";
+const useStore = create(set => ({ count: 0, inc: () => set(s => ({ count: s.count + 1 })) }));
+function Counter() { const { count, inc } = useStore(); return <button onClick={inc}>{count}</button>; }
+
+/* 34. TypeScript Example */
+type Props = { name: string; age?: number };
+const HelloTS: React.FC<Props> = ({ name, age }) => <h1>{name} - {age}</h1>;
+
+/* 35. Deployment */
+// Vite: npm run build → dist → deploy
+// Next.js: Vercel
+// CRA: npm run build → build/ → Netlify/Vercel
+
+/* 36. Dev Tools */
+// React Developer Tools Extension
+// Profiler for performance
+// StrictMode for catching issues
 
